@@ -13,3 +13,18 @@
  *= require_tree .
  *= require_self
  */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* トップページ用のCSS */
+.top-image{
+  color:#FFF;
+  background-image: url("top.jpg");
+  background-position: center;
+  background-size: cover;
+  height: 720px;
+  width: 1080px;
+}

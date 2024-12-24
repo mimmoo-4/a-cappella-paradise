@@ -1,0 +1,4 @@
+<h2>ジャンル名</h2>
+<p><%= @genre.name %></p>
+<%= link_to "編集",edit_genre_path(@genre.id) %>
+<%= link_to "削除", genre_path(@genre.id), method: :delete, data: { confirm: "本当に削除しますか？" } %>
