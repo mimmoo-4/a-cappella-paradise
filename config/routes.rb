@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  get 'members/show'
+  get 'members/edit'
   root to: "homes#top"
   devise_for :members
-  resources :members
+  resources :members, only:[:show, :edit]
   resources :posts
   resources :genres
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

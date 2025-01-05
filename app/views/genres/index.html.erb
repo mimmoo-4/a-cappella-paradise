@@ -2,7 +2,10 @@
 
 <ul>
   <% @genres.each do |genre| %>
-    <li><%= genre.id %></li>
-    <li><%= genre.name %></li>
+  <p>ジャンル名</p>
+    <span>
+      <%= link_to genre.name, "/genres/#{genre.id}" %>
+    </span>
   <% end %>
 </ul>
+<%= link_to "新規作成", new_genre_path %>

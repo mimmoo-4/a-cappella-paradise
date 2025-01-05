@@ -1,0 +1,16 @@
+<h1><%= @member.nickname %></h1>
+<% @posts.each do |post| %>
+  <tr>
+    <td>
+      <%= link_to member_path(@member) do %>
+        <%= image_tag @member.get_profile_image(100,100) %>
+      <% end %>
+    </td>
+    <td><%= link_to post.post_title, post_path(post) %></td>
+    <td><%= post.post_text %></td>
+  </tr>
+</tbody>
+<% end %>
+
+
+

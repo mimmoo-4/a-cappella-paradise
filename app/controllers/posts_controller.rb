@@ -5,8 +5,11 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @post.save
-    redirect_to posts_path
+    if @post.save
+      redirect_to post_path(@post.id)
+    else
+      render :new
+    end
   end
 
   def index
@@ -15,6 +18,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @genre = Genre.find(@post.genre_id)
   end
 
   def edit
@@ -36,6 +40,6 @@ class PostsController < ApplicationController
 private
 
   def post_params
-    params.require(:post).permit(:post_title, :post_text, :member_id, :genre_id)
+    params.require(:post).permit(:post_title, :post_text, :member_id, :genre_id).merge(member_id: current_member.id)
   end
 end

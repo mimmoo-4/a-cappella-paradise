@@ -1,2 +1,15 @@
-<h1>Posts#edit</h1>
-<p>Find me in app/views/posts/edit.html.erb</p>
+<h1>編集画面</h1>
+
+<%= form_with model: @post do |f| %>
+
+  <h4>タイトル</h4>
+  <%= f.text_field :post_title %>
+
+  <h4>本文</h4>
+  <%= f.text_area :post_text %>
+
+  <h4>投稿ジャンル</h4>
+  <%= f.collection_select :genre_id, Genre.all, :id, :name, {prompt: '選択してください'} %>
+
+  <%= f.submit'投稿' %>
+<% end %>
