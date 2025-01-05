@@ -19,6 +19,7 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @genre = Genre.find(@post.genre_id)
+    @member = Member.find(@post.member_id)
   end
 
   def edit

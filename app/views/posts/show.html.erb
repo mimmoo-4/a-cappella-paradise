@@ -7,6 +7,9 @@
 <h2>ジャンル</h2>
 <p><%= @genre.name %></p>
 
+<h2>投稿者</h2>
+<p><%= link_to @member.nickname,member_path(@member.id) %></p>
+
 <% if @post.member == current_member %>
   <%= link_to "編集",edit_post_path(@post.id) %>
   <%= link_to "削除", post_path(@post.id), method: :delete, data: { confirm: "本当に削除しますか？" } %>
