@@ -5,12 +5,25 @@ class MembersController < ApplicationController
   end
 
   def edit
+    @member = Member.find(params[:id])
+  end
+
+  def update
+    member = Member.find(params[:id])
+    member.update(member_params)
+    redirect_to member_path(member.id)
   end
 
   def destroy
     member = Member.find_by(id: params[:id])
     member.destroy
-    redirect_to root_path
+    redirect_to new_member_registration_path
+  end
+
+  private
+
+  def member_params
+    params.require(:member).permit(:name, :email, :nickname, :profile_image, :address, :self_introduction, :main_part)
   end
 
 end
