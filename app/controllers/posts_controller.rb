@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  def new
+    def new
     @post = Post.new
   end
 
@@ -24,10 +24,12 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    is_matching_login_member
   end
 
   def update
-    post = Post.find(params[:id])
+    @post = Post.find(params[:id])
+    is_matching_login_member
     post.update(post_params)
     redirect_to post_path(post.id)
   end
@@ -43,4 +45,12 @@ private
   def post_params
     params.require(:post).permit(:post_title, :post_text, :member_id, :genre_id).merge(member_id: current_member.id)
   end
+
+  def is_matching_login_member
+    member = Member.find(@post.member_id)
+    unless member.id == current_member.id
+      redirect_to posts_path
+    end
+  end
+
 end
