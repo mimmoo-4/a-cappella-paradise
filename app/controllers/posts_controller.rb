@@ -30,14 +30,17 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     is_matching_login_member
-    @post.update(post_params)
-    redirect_to post_path(@post.id)
+    if @post.update(post_params)
+      redirect_to post_path(@post.id)
+    else
+      render :edit
+    end
   end
 
   def destroy
     post = Post.find(params[:id])
     post.destroy
-    redirect_to posts_path
+    redirect_to member_path(current_member.id)
   end
 
 private

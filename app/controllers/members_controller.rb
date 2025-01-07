@@ -20,8 +20,11 @@ class MembersController < ApplicationController
     end
 
     @member = Member.find(params[:id])
-    @member.update(member_params)
-    redirect_to member_path(@member.id)
+    if @member.update(member_params)
+      redirect_to member_path(@member.id)
+    else
+      render :edit
+    end
   end
 
   def destroy

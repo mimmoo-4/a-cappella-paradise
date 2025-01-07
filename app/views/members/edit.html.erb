@@ -1,4 +1,12 @@
 <h2>プロフィール編集</h2>
+<% if @member.errors.any? %>
+  <%= @member.errors.count %>件のエラーが発生しました。
+  <ul>
+    <% @member.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 <%= form_with model: @member do |f| %>  <div class="field">
   <div class="field">
     <%= f.label "ニックネーム" %><br>
@@ -22,4 +30,5 @@
   </div>
 
   <%= f.submit "変更を保存" %>
+  <%= link_to "退会する", member_path(current_member.id), method: :delete, data: { confirm: "本当に退会しますか？" } %>
 <% end %>
