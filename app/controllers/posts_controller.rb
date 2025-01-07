@@ -30,8 +30,8 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     is_matching_login_member
-    post.update(post_params)
-    redirect_to post_path(post.id)
+    @post.update(post_params)
+    redirect_to post_path(@post.id)
   end
 
   def destroy
