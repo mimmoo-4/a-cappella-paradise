@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :member
-  belongs_to :genre
+  belongs_to :genre, optional: true
 
   validates :post_title, presence: true
   validates :post_text, presence: true
