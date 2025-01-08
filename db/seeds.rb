@@ -6,7 +6,7 @@
 #   member = Member.find_or_create_by!([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-
+#ジャンル
 one = Genre.find_or_create_by!(name: "ジャンル１") do |genre|
 end
 
@@ -15,7 +15,7 @@ end
 
 three = Genre.find_or_create_by!(name: "ジャンル３") do |genre|
 end
-
+#会員
 olivia = Member.find_or_create_by!(email: "olivia@example.com") do |member|
   member.name = "Olivia"
   member.furigana = "おりびあ"
@@ -44,7 +44,7 @@ lucas = Member.find_or_create_by!(email: "lucas@example.com") do |member|
   member.main_part = "リード"
   member.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/kkrn_icon_user_3.png"), filename:"sample-member3.jpg")
 end
-
+#投稿
 Post.find_or_create_by!(post_title: "メンバー募集中！") do |post|
   post.post_text = "バンドを組むため、４名メンバーを募集します。"
   post.member = olivia
