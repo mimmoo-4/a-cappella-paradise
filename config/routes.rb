@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   root to: "homes#top"
   devise_for :members
   resources :members
-  resources :posts
-    resources :post_comments, only: [:create, :destroy]
+  resources :posts do
+    resource :post_comments, only:[:create, :destroy]
+  end
   resources :genres
   get "search" => "searches#search"
 
