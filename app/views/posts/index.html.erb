@@ -4,5 +4,7 @@
 
 <p>タイトル</p>
 <span><%= link_to post.post_title, post_path(post.id) %></span>
+<span>ユーザーネーム:<%= link_to "#{post.member.nickname}", member_path(post.member.id) %></span>
+<span><%= link_to "#{post.post_comments.count}コメント", post_path(post.id) %></span>
 
 <% end %>
