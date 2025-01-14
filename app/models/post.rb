@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :member
   belongs_to :genre, optional: true
+  has_many :post_comments, dependent: :destroy
 
   validates :post_title, presence: true
   validates :post_text, presence: true
