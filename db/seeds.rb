@@ -62,3 +62,14 @@ Post.find_or_create_by!(post_title: "〇〇で歌います！") do |post|
   post.member = lucas
   post.genre = three
 end
+
+#管理者
+Member.find_or_create_by!(email: "admin@example.com") do |member|
+  member.name = "管理者"
+  member.furigana = "かんりしゃ"
+  member.nickname = "管理者"
+  member.password = ENV['ADMIN_PASSWORD']
+  member.address = "東京都港区"
+  member.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/kkrn_icon_user_4.png"), filename:"sample-member4.jpg")
+  member.admin = true
+end
