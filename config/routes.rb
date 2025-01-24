@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :members, only: [:destroy]
   end
 
+  scope module: :public do
   root to: "homes#top"
   devise_for :members
   resources :members
@@ -16,5 +17,6 @@ Rails.application.routes.draw do
   end
   resources :genres
   get "search" => "searches#search"
+end
 
 end
