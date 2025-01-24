@@ -1,0 +1,9 @@
+<h1>会員一覧</h1>
+<ul>
+  <% @members.each do |member| %>
+  <li>
+    <%= link_to  "#{member.nickname}", member_path(member.id) %> - <%= member.email %>
+    <%= link_to '削除', admin_member_path(member), method: :delete, data: { confirm: '本当に削除しますか？'} %>
+  </li>
+  <% end %>
+</ul>

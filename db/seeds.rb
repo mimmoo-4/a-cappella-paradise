@@ -62,3 +62,7 @@ Post.find_or_create_by!(post_title: "〇〇で歌います！") do |post|
   post.member = lucas
   post.genre = three
 end
+
+Admin.find_or_create_by!(email: "admin@example.com") do |admin|
+  admin.password = ENV['ADMIN_PASSWORD']
+end

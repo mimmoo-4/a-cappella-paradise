@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
-  get 'members/show'
-  get 'members/edit'
+    devise_for :admin, skip:[:registrations, :password],controllers:{
+    sessions: 'admin/sessions'
+  }
+
+  namespace :admin do
+    get 'dashboards', to: 'dashboards#index'
+    resources :members, only: [:destroy]
+  end
+
   root to: "homes#top"
   devise_for :members
   resources :members
@@ -10,8 +17,4 @@ Rails.application.routes.draw do
   resources :genres
   get "search" => "searches#search"
 
-
-  #favicon.icoへのリクエストを無視
-  #get '/favicon.ico', to: ->(env) { [404, {}, []] }
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
