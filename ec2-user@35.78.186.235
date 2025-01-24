@@ -1,0 +1,5 @@
+DB_USERNAME="root"
+DB_PASSWORD="vEW4wsWnpqXk"
+DB_HOST="rds-mysql-server.clkcwewi0ynb.ap-northeast-1.rds.amazonaws.com"
+DB_DATABASE="a-cappella-paradise"
+ADMIN_PASSWORD="acappella123"
