@@ -2,8 +2,8 @@
 <ul>
   <% @members.each do |member| %>
   <li>
-    <%= link_to  "#{member.nickname}", member_path(member.id) %> - <%= member.email %>
-    <%= link_to '削除', admin_member_path(member), method: :delete, data: { confirm: '本当に削除しますか？'} %>
+    <%= link_to image_tag(member.get_profile_image(50, 50)), admin_member_path(member.id) %>
+    <%= link_to  "#{member.nickname}", admin_member_path(member.id) %> - <%= member.email %>
   </li>
   <% end %>
 </ul>

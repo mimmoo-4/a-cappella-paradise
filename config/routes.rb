@@ -5,18 +5,19 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get 'dashboards', to: 'dashboards#index'
-    resources :members, only: [:destroy]
+    resources :posts
+    resources :members
+    resources :genres
   end
 
   scope module: :public do
-  root to: "homes#top"
-  devise_for :members
-  resources :members
-  resources :posts do
-    resources :post_comments, only:[:create, :destroy]
+    root to: "homes#top"
+    devise_for :members
+    resources :members
+    resources :posts do
+      resources :post_comments, only:[:create, :destroy]
+    end
+    get "search" => "searches#search"
   end
-  resources :genres
-  get "search" => "searches#search"
-end
 
 end
