@@ -9,7 +9,6 @@ class Public::GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
-    @member = Member.find(params[:id])
   end
 
   def new
