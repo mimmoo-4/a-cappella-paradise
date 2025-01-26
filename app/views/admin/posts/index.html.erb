@@ -1,9 +1,17 @@
 <h1>投稿一覧</h1>
-<ul>
+<table>
+  <tr>
+    <th></th>
+    <th scope="col">投稿者</th>
+    <th scope="col">タイトル</th>
+    <th></th>
+  </tr>
   <% @posts.each do |post| %>
-  <li>
-    <%= link_to  "#{post.post_title}", post_path(post.id) %>
-    <%= link_to '削除', admin_post_path(post), method: :delete, data: { confirm: '本当に削除しますか？'} %>
-  </li>
+  <tr>
+    <td><%= link_to image_tag(post.member.get_profile_image(30,30)),admin_member_path(post.member.id) %></td>
+    <td><%= link_to "#{post.member.nickname}",admin_member_path(post.member.id) %></td>
+    <td><%= link_to "#{post.post_title}", admin_post_path(post.id) %></td>
+    <td><%= link_to '削除', admin_post_path(post), method: :delete, data: { confirm: '本当に削除しますか？'} %></td>
+  </tr>
   <% end %>
 </ul>

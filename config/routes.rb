@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    get 'dashboards', to: 'dashboards#index'
-    resources :posts
+    resources :posts do
+      resources :post_comments, only:[:create, :destroy]
+    end
     resources :members
     resources :genres
   end

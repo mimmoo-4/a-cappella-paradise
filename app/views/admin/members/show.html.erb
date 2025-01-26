@@ -1,11 +1,20 @@
 <h1>ユーザーページ</h1>
 <h2><%= @member.nickname %></h2>
-<div><%= image_tag @member.get_profile_image(100,100) %></div>
-<div><%= link_to '削除', admin_member_path(@member), method: :delete, data: { confirm: '本当に削除しますか？'} %></div>
-<% @posts.each do |post| %>
-  <li>
-    <td><%= link_to post.post_title, admin_post_path(post) %></td>
-    <td><%= post.post_text %></td>
-    <td><%= link_to "#{post.post_comments.count} コメント", admin_post_path(post.id) %></td>
-  </li>
-<% end %>
+<div><%= image_tag @member.get_profile_image(100,100) %>
+  <%= link_to '強制退会', admin_member_path(@member), method: :delete, data: { confirm: '本当に退会させますか？'} %>
+</div>
+<table>
+  <tr>
+    <th scope="col">タイトル</th>
+    <th scope="col">本文</th>
+    <th scope="col">コメント数</th>
+  </tr>
+  <% @posts.each do |post| %>
+    <tr>
+      <td><%= post.post_title %></td>
+      <td><%= post.post_text %></td>
+      <td><%= link_to "#{post.post_comments.count} コメント", admin_post_path(post.id) %></td>
+    </tr>
+  <% end %>
+</table>
+<%= link_to "戻る",admin_members_path %>

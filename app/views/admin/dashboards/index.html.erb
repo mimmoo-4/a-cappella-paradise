@@ -1,9 +1,0 @@
-<h1>会員一覧</h1>
-<ul>
-  <% @members.each do |member| %>
-  <li>
-    <%= link_to image_tag(member.get_profile_image(50, 50)), admin_member_path(member.id) %>
-    <%= link_to  "#{member.nickname}", admin_member_path(member.id) %> - <%= member.email %>
-  </li>
-  <% end %>
-</ul>

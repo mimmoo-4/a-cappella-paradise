@@ -1,11 +1,5 @@
 <h1>ジャンル一覧</h1>
-
-<ul>
-  <% @genres.each do |genre| %>
-  <p>ジャンル名</p>
-    <span>
-      <%= link_to genre.name, "/admin/genres/#{genre.id}" %>
-    </span>
-  <% end %>
-</ul>
 <%= link_to "新規作成", new_admin_genre_path %>
+<% @genres.each do |genre| %>
+  <li><%= link_to genre.name, "/admin/genres/#{genre.id}" %> - <%= link_to"削除", admin_genre_path(genre.id), method: :delete, data: { confirm: "本当に削除しますか？" } %></li>
+<% end %>
