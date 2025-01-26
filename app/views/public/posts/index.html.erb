@@ -3,6 +3,7 @@
 <% @posts.each do |post| %>
 
 <p>タイトル</p>
+<%= image_tag post.member.get_profile_image(50,50) %>
 <span><%= link_to post.post_title, post_path(post.id) %></span>
 <span>ユーザーネーム:<%= link_to "#{post.member.nickname}", member_path(post.member.id) %></span>
 <span><%= link_to "#{post.post_comments.count}コメント", post_path(post.id) %></span>
