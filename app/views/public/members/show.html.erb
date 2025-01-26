@@ -3,19 +3,19 @@
 <% else %>
   <h1>ユーザーページ</h1>
 <% end %>
+<%= image_tag @member.get_profile_image(100,100) %>
 <h2><%= @member.nickname %></h2>
-<% @posts.each do |post| %>
+<table>
   <tr>
-    <td>
-      <%= link_to member_path(@member) do %>
-        <%= image_tag @member.get_profile_image(100,100) %>
-      <% end %>
-    </td>
-    <td><%= link_to post.post_title, post_path(post) %></td>
-    <td><%= post.post_text %></td>
-    <td><%= link_to "#{post.post_comments.count} コメント", post_path(post.id) %></td>
+    <th scope="col">タイトル</th>
+    <th scope="col">本文</th>
+    <th scope="col">コメント数</th>
   </tr>
-<% end %>
-
-
-
+  <% @posts.each do |post| %>
+    <tr>
+      <td><%= link_to post.post_title, post_path(post) %></td>
+      <td><%= post.post_text %></td>
+      <td><%= link_to "#{post.post_comments.count} コメント", post_path(post.id) %></td>
+    </tr>
+  <% end %>
+</table>
