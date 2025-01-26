@@ -1,0 +1,22 @@
+<h2>あなたの会員情報</h2>
+<%= image_tag user.get_profile_image(100,100) %>
+<table class="table">
+  <tr>
+    <th>ニックネーム</th>
+    <th><%= member.nickname %></th>
+  </tr>
+  <tr>
+    <th>自己紹介</th>
+    <th><%= member.introduction %></th>
+  </tr>
+</table>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <%= link_to edit_member_path(member) do %>
+    <button type="button" class="btn btn-outline-secondary btn-block">
+      <i class="fa-solid fa-user-gear"></i>
+    </button>
+    <% end %>
+  </div>
+</div>

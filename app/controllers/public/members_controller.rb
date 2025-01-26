@@ -33,6 +33,10 @@ class Public::MembersController < ApplicationController
     redirect_to new_member_registration_path
   end
 
+  def index
+    @members = Member.all
+  end
+
   private
 
   def member_params

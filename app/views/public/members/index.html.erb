@@ -1,0 +1,15 @@
+<h1>会員一覧</h1>
+<table>
+  <tr>
+    <th scope="col"></th>
+    <th scope="col">ニックネーム</th>
+    <th scope="col">メールアドレス</th>
+  </tr>
+  <% @members.each do |member| %>
+  <tr>
+    <td><%= link_to image_tag(member.get_profile_image(50, 50)), member_path(member.id) %></td>
+    <td><%= link_to  "#{member.nickname}", member_path(member.id) %></td>
+    <td><%= member.email %></td>
+  </tr>
+  <% end %>
+</table>
