@@ -1,23 +1,34 @@
-<h1>編集画面</h1>
-<% if @post.errors.any? %>
-  <%= @post.errors.count %>件のエラーが発生しました。
-  <ul>
-    <% @post.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
-<%= form_with model: @post do |f| %>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class='col-md-12'>
 
-  <h4>タイトル</h4>
-  <%= f.text_field :post_title %>
+      <h1>投稿編集</h1>
 
-  <h4>本文</h4>
-  <%= f.text_area :post_text %>
+      <% if @post.errors.any? %>
+        <%= @post.errors.count %>件のエラーが発生しました。
+        <ul>
+          <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
 
-  <h4>投稿ジャンル</h4>
-  <%= f.collection_select :genre_id, Genre.all, :id, :name, {prompt: '選択してください'} %>
+      <%= form_with model: @post do |f| %>
+        <h4>タイトル</h4>
+        <%= f.text_field :post_title, class: "form-control", style: "width:40%" %>
 
-  <%= f.submit'投稿' %>
-  <%= link_to "削除", post_path(@post.id), method: :delete, data: { confirm: "本当に削除しますか？" } %>
-<% end %>
+        <h4>本文</h4>
+        <%= f.text_area :post_text, class: "form-control", style: "width:100%", rows: "10" %>
+
+        <h4>投稿ジャンル</h4>
+        <%= f.collection_select :genre_id, Genre.all, :id, :name, {prompt: '選択してください'} %>
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-success" type="submit">編集を保存する</button>
+          <%= link_to post_path(@post.id), class: "btn btn-sm btn-danger", method: :delete, data: { confirm: "本当に削除しますか？" } do %>
+            <i class="fa-solid fa-trash-can">削除する</i>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
