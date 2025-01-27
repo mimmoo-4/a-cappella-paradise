@@ -18,7 +18,9 @@ Rails.application.routes.draw do
     resources :posts do
       resources :post_comments, only:[:create, :destroy]
     end
-    resources :groups
+    resources :groups do
+      resource :group_members, only: [:create, :destroy]
+    end
     get "search" => "searches#search"
   end
 
