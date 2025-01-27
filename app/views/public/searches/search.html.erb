@@ -17,8 +17,8 @@
         </tr>
       <% end %>
     </tbody>
-  <!-- 検索対象がMember以外（Postの時） -->
-  <% else %>
+  <!-- 検索対象がPostの時 -->
+  <% elsif @range == "Post" %>
     <h2>投稿検索結果  "<%= @word %>"</h2>
     <tr>
       <th colspan="1"></th>
@@ -31,6 +31,23 @@
           <td><%= image_tag post.member.get_profile_image(50,50) %></td>
           <td><%= link_to post.post_title, post_path(post.id) %></td>
           <td><%= post.post_text %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    <!-- 検索対象がGroupの時 -->
+  <% else %>
+    <h2>グループ検索結果  "<%= @word %>"</h2>
+    <tr>
+      <th colspan="1"></th>
+      <th>グループ名</th>
+      <th>紹介文</th>
+    <tr/>
+    <tbody>
+      <% @groups.each do |group| %>
+        <tr>
+          <td><%= image_tag group.get_group_image(50,50) %></td>
+          <td><%= link_to group.name, group_path(group.id) %></td>
+          <td><%= group.introduction %></td>
         </tr>
       <% end %>
     </tbody>

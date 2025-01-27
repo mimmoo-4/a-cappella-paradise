@@ -7,8 +7,10 @@ class Public::SearchesController < ApplicationController
 
     if @range == "Member"
       @members = Member.looks(params[:search], params[:word])
-    else
+    elsif @range == "Post"
       @posts = Post.looks(params[:search], params[:word])
+    else
+      @groups = Group.looks(params[:search], params[:word])
     end
   end
 end
