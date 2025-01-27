@@ -35,7 +35,8 @@ class Public::MembersController < ApplicationController
   end
 
   def index
-    @members = Member.all
+    @member = current_member
+    @members = Member.all.page(params[:page]).per(10)
   end
 
   private

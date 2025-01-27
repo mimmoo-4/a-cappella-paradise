@@ -1,8 +1,4 @@
-<% if member_signed_in? && @member == current_member %>
-        <h2>マイページ</h2>
-      <% else %>
-        <h2>ユーザーページ</h2>
-      <% end %>
+<h2>会員情報</h2>
 <%= image_tag member.get_profile_image(100,100) %>
 <table class="table">
   <tr>
