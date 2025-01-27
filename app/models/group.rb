@@ -11,7 +11,7 @@ class Group < ApplicationRecord
     owner.id == member.id
   end
 
-  def includeMember?(member)
+  def includesMember?(member)
     group_members.exists?(member_id: member.id)
   end
 
