@@ -1,5 +1,5 @@
 class Group < ApplicationRecord
-  has_many :group_users, dependent: :destroy
+  has_many :group_members, dependent: :destroy
   belongs_to :owner, class_name: 'Member'
   has_many :members, through: :group_members
 

@@ -9,6 +9,7 @@ class Public::GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
+    @member = Member.find(current_member.id)
   end
 
   def new
@@ -35,6 +36,12 @@ class Public::GroupsController < ApplicationController
     else
       render "edit"
     end
+  end
+
+  def destroy
+    @group = Group.find(params[:id])
+    @group.destroy
+    redirect_to groups_path
   end
 
   private

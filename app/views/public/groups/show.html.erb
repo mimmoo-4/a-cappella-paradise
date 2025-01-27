@@ -2,38 +2,34 @@
 <%= flash[:notice] %>
   <div class='row'>
     <div class='col-md-3'>
-      <%= render 'member', user: @member %>
-      <%= render 'posts/new', post: @post %>
+    <%= render 'public/members/member', member: @member %>
     </div>
     <div class='col-md-8 offset-md-1'>
-      <h2>グループ詳細</h2>
-      <table class='table table-hover table-inverse'>
-        <thead>
-          <tr>
-            <th></th>
-            <th>グループ名</th>
-            <th>紹介文</th>
-            <th colspan="3"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <% if @group.group_image.attached? %>
-                <%= image_tag @group.group_image,size:"50x50" %>
-              <% else %>
-                <%= image_tag 'no_image', size: "50x50" %>
-              <% end %>
-            </td>
-            </td>
-            <td><%= @group.name %></td>
-            <td><%= @group.introduction %></td>
-            <td>
-              <% if @group.owner_id == current_member.id %>
-                <%= link_to 'Edit', edit_group_path(@group), class: "btn btn-sm btn-success" %>
-              <% end %>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="underline"><h2>グループ詳細</h2></div>
+      <div style="height: 10px;"></div>
+      <% if @group.group_image.attached? %>
+        <%= image_tag @group.group_image, size: "100x100" %>
+      <% else %>
+        <%= image_tag 'no_image', size: "100x100" %>
+      <% end %>
+      <div style="height: 10px;"></div>
+      <h4>グループ名</h4>
+      <h5><%= @group.name %></h5>
+      <div style="height: 10px;"></div>
+      <h4>紹介文</h4>
+      <h5><%= simple_format(@group.introduction) %></h5>
+      <div style="height: 10px;"></div>
+      <h4>グループリーダー</h4>
+      <h5><%= link_to @group.owner.name, member_path(@group.owner) %></h5>
+      <% if @group.owner_id == current_member.id %>
+        <%= link_to edit_group_path(@group), class: "btn btn-sm btn-success" do %>
+          <i class="fa-solid fa-pen">編集する</i>
+        <% end %>
+        <%= link_to group_path(@group), class: "btn btn-sm btn-danger",method: :delete, "data-confirm" => "本当に解散しますか？" do %>
+          <i class="fa-solid fa-trash-can">解散する</i>
+        <% end %>
+      <% end %>
+      <%= link_to groups_path, class: "btn btn-sm btn-primary" do %>
+        <i class="fa-solid fa-arrow-left">戻る</i>
+      <% end %>
     </div>

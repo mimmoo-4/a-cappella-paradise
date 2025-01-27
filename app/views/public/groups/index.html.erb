@@ -2,12 +2,11 @@
   <%= flash[:notice] %>
   <div class='row'>
     <div class='col-md-3'>
-      <!--<= render partial: "partial/user_info", locals: { user: @user }%>
-      <= render partial: "partial/new_books", locals: { book: @book } %>-->
+      <%= render 'public/members/member', member: @member %>
     </div>
-
     <div class='col-md-8 offset-md-1'>
-      <h2>Groups</h2>
+      <h2>グループ一覧</h2>
+      <%=link_to "グループを作成する",new_group_path %>
       <%= render 'index', groups: @groups %>
     </div>
   </div>
