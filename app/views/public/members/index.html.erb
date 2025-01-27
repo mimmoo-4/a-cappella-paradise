@@ -4,7 +4,7 @@
       <%= render 'member', member: @member %>
     </div>
     <div class="col-md-8 offset-md-1">
-      <h2>投稿一覧</h2>
+      <h2>会員一覧</h2>
       <table class="table table-hover">
         <thead>
           <tr>
@@ -27,7 +27,7 @@
             <td class="td_vertical_align_middle"><%= member.main_part %></td>
           </tr>
         <% end %>
-        
+
         </tbody>
       </table>
       <%= paginate @members %>
