@@ -3,6 +3,7 @@ class Group < ApplicationRecord
   belongs_to :owner, class_name: 'Member'
   has_many :permits, dependent: :destroy
   has_many :members, through: :group_members, source: :member
+  has_many :group_chats, dependent: :destroy
 
   validates :name, presence: true
   validates :introduction, presence: true
