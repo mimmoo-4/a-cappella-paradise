@@ -1,0 +1,17 @@
+<h1>コメント一覧</h1>
+<table>
+  <tr>
+    <th scope="col"></th>
+    <th scope="col">ニックネーム</th>
+    <th scope="col">コメント</th>
+  </tr>
+  <%= paginate @post_comments %>
+  <% @post_comments.each do |post_comment| %>
+  <tr>
+    <td><%= link_to image_tag(post_comment.member.get_profile_image(50, 50)), admin_member_path(post_comment.member.id) %></td>
+    <td><%= link_to  "#{post_comment.member.nickname}", admin_member_path(post_comment.member.id) %></td>
+    <td><%= post_comment.comment %></td>
+    <td><%= link_to "削除", admin_post_comment_path(post_comment), method: :delete, data: { confirm: '本当に削除しますか？'} %></td>
+  </tr>
+  <% end %>
+</table>

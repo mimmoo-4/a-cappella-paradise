@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :members
     resources :genres
     resources :groups, only:[:destroy, :index]
+    resources :post_comments, only:[:destroy, :index]
   end
 
   scope module: :public do
