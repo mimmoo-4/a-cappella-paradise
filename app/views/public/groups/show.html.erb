@@ -30,23 +30,35 @@
         <%= image_tag @group.owner.profile_image, size: "100x100" %>
       <% end %>
       <h5><%= link_to @group.owner.name, member_path(@group.owner) %></h5>
-      <% if @group.is_owned_by?(current_member) %>
-        <%= link_to edit_group_path(@group), class: "btn btn-sm btn-success" do %>
-          <i class="fa-solid fa-pen">編集する</i>
-        <% end %>
-        <%= link_to group_path(@group), class: "btn btn-sm btn-danger",method: :delete, "data-confirm" => "本当に解散しますか？" do %>
-          <i class="fa-solid fa-trash-can">解散する</i>
-        <% end %>
-      <% elsif @group.includesMember?(current_member) %>
-        <%= link_to group_group_members_path(@group), class: "btn btn-sm btn-danger",method: :delete, "data-confirm" => "本当に退会しますか？" do %>
+
+      <% if @group.group_members.exists?(member_id: current_member.id) %>
+        <%= link_to group_group_members_path(@group), class: "btn btn-sm btn-danger",method: :delete, "data-confirm" => "本当にグループを脱退しますか？" do %>
           <i class="fa-solid fa-person-through-window">脱退する</i>
         <% end %>
+      <% elsif @group.permits.exists?(member_id: current_member.id) %>
+        <%= link_to group_permits_path(@group), method: :delete, class: "btn btn-sm btn-danger" do %>
+          <i class="fa-solid fa-person-circle-xmark">申請取消</i>
+        <% end %>
+      <% elsif @group.owner_id == current_member.id %>
       <% else %>
-        <%= link_to group_group_members_path(@group), class: "btn btn-sm btn-success", method: :post do %>
-          <i class="fa-solid fa-person-walking-dashed-line-arrow-right">参加する</i>
+        <%= link_to group_permits_path(@group), method: :post, class: "btn btn-sm btn-success" do %>
+          <i class="fa-solid fa-person-circle-plus">加入申請</i>
         <% end %>
       <% end %>
       <%= link_to groups_path, class: "btn btn-sm btn-primary" do %>
         <i class="fa-solid fa-arrow-left">戻る</i>
       <% end %>
-    </div>
+      <% if @group.owner_id == current_member.id %>
+        <div class="dropdown">
+          <button class="btn btn-sm btn-secondary dropdown-toggle"
+                  type="button" id="dropdownMenu1" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+            オーナー専用項目
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <%= link_to "承認待ち一覧", permits_path(@group),  class: "dropdown-item text-secondary bg-transparent" %>
+            <%= link_to 'グループ編集', edit_group_path(@group),  class: "dropdown-item text-success bg-transparent" %>
+            <%= link_to 'グループ削除', group_path(@group), method: :delete,  class: "dropdown-item text-danger bg-transparent", data: { confirm: "本当に削除しますか？" } %>
+          </div>
+        </div>
+      <% end %>

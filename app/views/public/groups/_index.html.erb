@@ -14,9 +14,9 @@
           <%= image_tag group.get_group_image(50,50) %>
         </td>
         <td><%= link_to group.name,group_path(group) %></td>
-        <td><%= group.introduction %></td>
+        <td><%= truncate(group.introduction, length: 20) %></td>
         <% if group.is_owned_by?(current_member) %>
-          <td><%= link_to 'Edit', edit_group_path(group), class: "group_#{group.id} btn btn-sm btn-success" %>
+          <td><%= link_to '編集', edit_group_path(group), class: "group_#{group.id} btn btn-sm btn-success" %>
           </td>
         <% end %>
       </tr>

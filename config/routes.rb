@@ -19,8 +19,10 @@ Rails.application.routes.draw do
       resources :post_comments, only:[:create, :destroy]
     end
     resources :groups do
+      resource :permits, only: [:create, :destroy]
       resource :group_members, only: [:create, :destroy]
     end
+    get "groups/:id/permits" => "groups#permits", as: :permits
     get "search" => "searches#search"
   end
 

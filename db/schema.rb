@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_01_25_052428) do
+ActiveRecord::Schema.define(version: 2025_01_27_123222) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -95,6 +95,15 @@ ActiveRecord::Schema.define(version: 2025_01_25_052428) do
     t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
   end
 
+  create_table "permits", force: :cascade do |t|
+    t.integer "member_id", null: false
+    t.integer "group_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_permits_on_group_id"
+    t.index ["member_id"], name: "index_permits_on_member_id"
+  end
+
   create_table "post_comments", force: :cascade do |t|
     t.text "comment"
     t.integer "member_id"
@@ -116,4 +125,6 @@ ActiveRecord::Schema.define(version: 2025_01_25_052428) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "group_members", "groups"
   add_foreign_key "group_members", "members"
+  add_foreign_key "permits", "groups"
+  add_foreign_key "permits", "members"
 end
