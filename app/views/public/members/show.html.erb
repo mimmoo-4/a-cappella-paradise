@@ -1,21 +1,27 @@
-<% if member_signed_in? && @member == current_member %>
-  <h1>マイページ</h1>
-<% else %>
-  <h1>ユーザーページ</h1>
-<% end %>
-<%= image_tag @member.get_profile_image(100,100) %>
-<h2><%= @member.nickname %></h2>
-<table>
-  <tr>
-    <th scope="col">タイトル</th>
-    <th scope="col">本文</th>
-    <th scope="col">コメント数</th>
-  </tr>
-  <% @posts.each do |post| %>
-    <tr>
-      <td><%= link_to post.post_title, post_path(post) %></td>
-      <td><%= post.post_text %></td>
-      <td><%= link_to "#{post.post_comments.count} コメント", post_path(post.id) %></td>
-    </tr>
-  <% end %>
-</table>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render 'member', member: @member %>
+      <%= render 'public/posts/new', post: @post %>
+    </div>
+    <div class='col-md-8 offset-md-1'>
+      <h2><%= @member.nickname %>の投稿一覧</h2>
+      <table class='table table-hover table-inverse'>
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">タイトル</th>
+            <th scope="col">ジャンル</th>
+            <th scope="col">コメント数</th>
+          </tr>
+        </thead>
+        <% @posts.each do |post| %>
+        <tr>
+          <td><%= link_to post.post_title, post_path(post) %></td>
+          <td><%= post.genre.name %></td>
+          <td><%= link_to "#{post.post_comments.count} コメント", post_path(post.id) %></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

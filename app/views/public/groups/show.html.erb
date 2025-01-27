@@ -2,6 +2,8 @@
 <%= flash[:notice] %>
   <div class='row'>
     <div class='col-md-3'>
+      <%= render 'member', user: @member %>
+      <%= render 'posts/new', post: @post %>
     </div>
     <div class='col-md-8 offset-md-1'>
       <h2>グループ詳細</h2>

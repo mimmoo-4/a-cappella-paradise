@@ -1,5 +1,9 @@
-<h2>あなたの会員情報</h2>
-<%= image_tag user.get_profile_image(100,100) %>
+<% if member_signed_in? && @member == current_member %>
+        <h2>マイページ</h2>
+      <% else %>
+        <h2>ユーザーページ</h2>
+      <% end %>
+<%= image_tag member.get_profile_image(100,100) %>
 <table class="table">
   <tr>
     <th>ニックネーム</th>
@@ -7,7 +11,7 @@
   </tr>
   <tr>
     <th>自己紹介</th>
-    <th><%= member.introduction %></th>
+    <th><%= member.self_introduction %></th>
   </tr>
 </table>
 
