@@ -1,34 +1,43 @@
-<h2>プロフィール編集</h2>
-<% if @member.errors.any? %>
-  <%= @member.errors.count %>件のエラーが発生しました。
-  <ul>
-    <% @member.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
-<%= form_with model: @member do |f| %>  <div class="field">
-  <div class="field">
-    <%= f.label "ニックネーム" %><br>
-    <%= f.text_field :nickname, autofocus:true, id:"inputNickname", placeholder:"ニックネーム" %>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-3 offset-4">
+      <h2>プロフィール編集</h2>
+      <% if @member.errors.any? %>
+        <%= @member.errors.count %>件のエラーが発生しました。
+        <ul>
+          <% @member.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      <%= form_with model: @member do |f| %>  <div class="field">
+        <div class="field">
+          <%= f.label "ニックネーム" %><br>
+          <%= f.text_field :nickname, autofocus:true, id:"inputNickname", placeholder:"ニックネーム" %>
+        </div>
+        <div class="field">
+          <label for="inputImage">プロフィール画像</label><br>
+          <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>
+        </div>
+        <div class="field">
+          <%= f.label "居住地" %><br>
+          <%= f.text_field :address, autofocus:true, id:"inputAddress", placeholder:"居住地(市町村まで)" %>
+        </div>
+        <div class="field">
+          <%= f.label "自己紹介" %><br>
+          <%= f.text_area :self_introduction, autofocus:true, id:"inputSelf_Introduction", placeholder:"自己紹介(空欄可)" %>
+        </div>
+        <div class="field">
+          <%= f.label "メインパート" %><br>
+          <%= f.text_field :main_part, autofocus:true, id:"inputMain_Part", placeholder:"メインパート(空欄可)" %>
+        </div>
+        <div class="d-flex justify-content-end">
+          <%= f.submit "保存する",class: "btn btn-sm btn-success" %>
+          <%= link_to member_path(current_member.id), class: "btn btn-sm btn-danger", method: :delete, data: { confirm: "本当に退会しますか？" } do %>
+            <i class="fa-solid fa-person-circle-xmark">退会する</i>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
-  <div class="field">
-    <label for="inputImage">プロフィール画像</label><br>
-    <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>
-  </div>
-  <div class="field">
-    <%= f.label "居住地" %><br>
-    <%= f.text_field :address, autofocus:true, id:"inputAddress", placeholder:"居住地(市町村まで)" %>
-  </div>
-  <div class="field">
-    <%= f.label "自己紹介" %><br>
-    <%= f.text_area :self_introduction, autofocus:true, id:"inputSelf_Introduction", placeholder:"自己紹介(空欄可)" %>
-  </div>
-  <div class="field">
-    <%= f.label "メインパート" %><br>
-    <%= f.text_field :main_part, autofocus:true, id:"inputMain_Part", placeholder:"メインパート(空欄可)" %>
-  </div>
-
-  <%= f.submit "変更を保存" %>
-  <%= link_to "退会する", member_path(current_member.id), method: :delete, data: { confirm: "本当に退会しますか？" } %>
-<% end %>
+</div>
