@@ -1,0 +1,16 @@
+<h1>グループ一覧</h1>
+<table>
+  <tr>
+    <th scope="col"></th>
+    <th scope="col">グループ名</th>
+    <th scope="col">紹介文</th>
+  </tr>
+  <% @groups.each do |group| %>
+  <tr>
+    <td><%= image_tag group.get_group_image(50, 50) %></td>
+    <td><%= group.name %></td>
+    <td><%= group.introduction %></td>
+    <td><%= link_to "強制解散", admin_group_path(group), method: :delete, data: { confirm: '本当に強制解散しますか？'} %></td>
+  </tr>
+  <% end %>
+</table>

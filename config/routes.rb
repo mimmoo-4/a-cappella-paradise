@@ -5,10 +5,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :posts do
-      resources :post_comments, only:[:create, :destroy]
+      resources :post_comments, only:[:destroy]
     end
     resources :members
     resources :genres
+    resources :groups, only:[:destroy, :index]
   end
 
   scope module: :public do
