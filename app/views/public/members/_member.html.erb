@@ -18,8 +18,13 @@
 <div class='row'>
   <div class='col-md-12'>
     <%= link_to edit_member_path(member) do %>
-    <button type="button" class="btn btn-outline-secondary btn-block">
-      <i class="fa-solid fa-user-gear"></i>
+    <button type="button" class="btn btn-outline-success btn-block">
+      <i class="fa-solid fa-user-gear">会員情報編集</i>
+    </button>
+    <% end %>
+    <%= link_to new_post_path do %>
+    <button type="button" class="btn btn-outline-primary btn-block">
+      <i class="fa-solid fa-square-arrow-up-right">新規投稿</i>
     </button>
     <% end %>
   </div>

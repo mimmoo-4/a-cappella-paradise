@@ -1,31 +1,59 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
     <div class="col-md-3">
-      <%= render 'member', member: @member %>
-      <%= render 'public/posts/new', post: @post %>
+      <%= render 'public/members/member', member: @member %>
+      <%= render 'new', post: @post %>
     </div>
     <div class="col-md-8 offset-md-1">
-      <h2>投稿詳細</h2>
-      <table class="table table-hover table-inverse">
-        <tbody>
-          <tr>
-            <td><%= image_tag @member.get_profile_image(100,100) %><br>
-                <%= link_to @member.name,member_path(@member.id) %></td>
-            <td><%= link_to @post.title, post_path %></td>
-            <td><%= @book.body %></td>
-            <td>
-              <% if @user == current_user %>
-              <%= link_to "Edit", edit_book_path(@book), class: "btn btn-sm btn-success"%>
-            </td>
-            <td>
-              <%= link_to "Destroy", book_path(@book), class: "btn btn-sm btn-danger",
-                            method: :delete, "data-confirm" => "本当に消しますか？" %>
-            </td>
-            <% end %>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <h4>タイトル</h4>
+      <p><%= @post.post_title %></p>
 
+      <h4>本文</h4>
+      <p><%= simple_format(@post.post_text) %></p>
+
+      <h4>ジャンル</h4>
+      <p><%= @genre.name %></p>
+
+      <h4>投稿者</h4>
+      <p><%= image_tag @member.get_profile_image(100,100) %><br>
+      <%= link_to @member.nickname,member_path(@member.id) %></p>
+      <% if @member == current_member %>
+        <%= link_to edit_post_path(@post), class: "btn btn-sm btn-success" do %>
+          <i class="fa-solid fa-pen">編集</i>
+        <% end %>
+        <%= link_to post_path(@post), class: "btn btn-sm btn-danger",method: :delete, "data-confirm" => "本当に消しますか？" do %>
+          <i class="fa-solid fa-trash-can">削除</i>
+        <% end %>
+        <%= link_to :back, class: "btn btn-sm btn-primary" do %>
+          <i class="fa-solid fa-arrow-left">戻る</i>
+        <% end %>
+      <% end %>
+      <div class="p-1"><%= paginate @post_comments %></div>
+      <div>
+        <% @post_comments.each do |post_comment| %>
+          <div class="border-top pb-2">
+            <%= image_tag post_comment.member.get_profile_image(50,50) %>
+            <%= post_comment.member.nickname %>
+            <%= post_comment.created_at.strftime('%Y/%m/%d') %><br>
+            <%= simple_format(post_comment.comment) %>
+          <% if post_comment.member == current_member %>
+            <div class= "d-flex justify-content-end">
+              <%= link_to post_post_comment_path(post_comment.post, post_comment), class: "btn btn-sm btn-outline-danger", method: :delete, data: { confirm: "本当に削除しますか？" } do %>
+                <i class="fa-solid fa-trash-can"></i>
+              <% end %>
+            </div>
+          <% end %>
+          </div>
+        <% end %>
+        
+      </div>
+      <div class="border-top"></div>
+      <div style="height: 10px;"></div>
+      <div>
+        <%= form_with model: [@post, @post_comment] do |f| %>
+          <%= f.text_area :comment, class: "form-control", style: "width:100%", rows: '3', placeholder: "コメントをここに" %>
+          <%= f.submit "送信する",class: "btn btn-sm btn-success" %>
+        <% end %>
+      </div>
   </div>
 </div>
