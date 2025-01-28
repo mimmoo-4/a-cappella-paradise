@@ -10,15 +10,15 @@ class Public::PermitsController < ApplicationController
 
   def destroy #申請を取り消す
     @group = Group.find(params[:group_id])
-    #if @group.owner_id == current_member.id
-      #permit = Permit.find_by(member_id: params[:permit_id], group_id: params[:group_id])
-      #permit.destroy
-      #redirect_to request.referer, notice: "グループへの参加申請を取り消しました"
-    #else
-      permit = current_member.permits.find_by(group_id: params[:group_id])
+    if @group.owner_id == current_member.id
+      permit = Permit.find(params[:id])
+      permit.destroy
+      redirect_to request.referer, notice: "グループへの参加申請を拒否しました"
+    else
+      permit = Permit.find(params[:id])
       permit.destroy
       redirect_to request.referer, notice: "グループへの参加申請を取り消しました"
-    #end
+    end
   end
 
 

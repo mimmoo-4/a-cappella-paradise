@@ -25,9 +25,9 @@
                   <%= link_to group_group_members_path(@group, permit_id: permit.id), method: :post, class: "btn btn-sm btn-success", data: {confirm: "本当に承認しますか？"} do %>
                     <i class="fa-regular fa-circle">承認</i>
                   <% end %>
-                  <!--<= link_to group_permit_path(permit.group, permit), method: :delete, class: "btn btn-sm btn-danger", data: {confirm: "本当に拒否しますか？"} do %>
+                  <%= link_to group_permit_path(permit.group, permit), method: :delete, class: "btn btn-sm btn-danger", data: {confirm: "本当に拒否しますか？"} do %>
                     <i class="fa-solid fa-xmark">拒否</i>
-                  < end %>-->
+                  <% end %>
                 </td>
               </tr>
             <% end %>

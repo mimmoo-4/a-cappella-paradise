@@ -9,7 +9,8 @@ class Public::GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
-    @member = Member.find(current_member.id)
+    @member = current_member
+    @permit = Permit.where(group_id: @group.id, member_id: @member.id).first
   end
 
   def new

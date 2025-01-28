@@ -39,7 +39,7 @@
           <i class="fa-solid fa-person-through-window">脱退する</i>
         <% end %>
       <% elsif @group.permits.exists?(member_id: current_member.id) %>
-        <%= link_to group_permits_path(@group), method: :delete, class: "btn btn-sm btn-danger" do %>
+        <%= link_to group_permit_path(@group, @permit), method: :delete, class: "btn btn-sm btn-danger" do %>
           <i class="fa-solid fa-person-circle-xmark">申請取消</i>
         <% end %>
       <% elsif @group.owner_id == current_member.id %>

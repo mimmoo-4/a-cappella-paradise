@@ -21,7 +21,7 @@ Rails.application.routes.draw do
       resources :post_comments, only:[:create, :destroy]
     end
     resources :groups do
-      resource :permits, only: [:create, :destroy]
+      resources :permits, only: [:create, :destroy]
       resource :group_members, only: [:create, :destroy]
       resources :group_chats, only:[:create, :destroy, :show]
     end
