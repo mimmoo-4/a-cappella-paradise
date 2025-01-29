@@ -1,4 +1,6 @@
 class Public::GroupChatsController < ApplicationController
+  before_action :authenticate_member!
+  before_action :check_group_owner
   def create
     group = Group.find(params[:group_id])
     chat = current_member.group_chats.new(group_chat_params)
@@ -22,6 +24,13 @@ class Public::GroupChatsController < ApplicationController
 
   def group_chat_params
     params.require(:group_chat).permit(:chat)
+  end
+
+  def check_group_owner
+    @group = Group.find(params[:id])
+    unless @group.owner_id == current_member.id || @group.includesMember?(current_member)
+      redirect_to groups_path
+    end
   end
 
 end

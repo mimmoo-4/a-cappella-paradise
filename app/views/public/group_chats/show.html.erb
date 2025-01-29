@@ -2,13 +2,22 @@
   <div class="row">
     <div class="col-md-12">
       <h1>グループチャット</h1>
-      <div class="p-1"><%= paginate @group_chats %></div>
+      <div>
+          <% if @group_chat.errors.any? %>
+            <p>空欄ではチャット送信できません。</p>
+          <% end %>
+          <%= form_with model: [@group, @group_chat] do |f| %>
+            <%= f.text_area :chat, class: "form-control", style: "width:100%", rows: '3', placeholder: "メッセージをここに" %>
+            <%= f.submit "送信する",class: "btn btn-sm btn-success" %>
+          <% end %>
+        </div>
+      <div class="d-flex justify-content-center"><%= paginate @group_chats, theme: 'bootstrap-5' %></div>
       <div>
         <% @group_chats.each do |group_chat| %>
           <div class="border-top pb-2">
             <%= image_tag group_chat.member.get_profile_image(50,50) %>
             <%= group_chat.member.nickname %>
-            <%= group_chat.created_at.strftime('%Y/%m/%d') %><br>
+            <%= group_chat.created_at.strftime('%Y/%m/%d %H:%M') %><br>
             <%= simple_format(group_chat.chat) %>
           <% if group_chat.member == current_member %>
             <div class= "d-flex justify-content-end">
@@ -19,16 +28,8 @@
           <% end %>
           </div>
         <% end %>
-        <div>
-          <% if @group_chat.errors.any? %>
-            <p>空欄ではチャット送信できません。</p>
-          <% end %>
-          <%= form_with model: [@group, @group_chat] do |f| %>
-            <%= f.text_area :chat, class: "form-control", style: "width:100%", rows: '3', placeholder: "メッセージをここに" %>
-            <%= f.submit "送信する",class: "btn btn-sm btn-success" %>
-          <% end %>
-        </div>
       </div>
+      <div class="d-flex justify-content-center"><%= paginate @group_chats, theme: 'bootstrap-5' %></div>
     </div>
   </div>
 </div>
