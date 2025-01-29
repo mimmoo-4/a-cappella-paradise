@@ -22,11 +22,11 @@
 /* トップページ用のCSS */
 .top-image{
   color:#FFF;
-  background-image: url("top.jpg");
-  background-position: center;
-  background-size: cover;
-  height: 720px;
-  width: 1080px;
+  background-image: url("top2.jpg");
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: contain;
+  height: 800px;
 }
 
 body {
