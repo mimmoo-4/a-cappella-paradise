@@ -27,10 +27,9 @@
             <td class="td_vertical_align_middle"><%= member.main_part %></td>
           </tr>
         <% end %>
-
         </tbody>
       </table>
-      <%= paginate @members, theme: 'bootstrap-5' %>
+      <div class="d-flex justify-content-center"><%= paginate @members, theme: 'bootstrap-5' %></div>
     </div>
   </div>
 </div>

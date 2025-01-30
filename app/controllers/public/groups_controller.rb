@@ -3,7 +3,7 @@ class Public::GroupsController < ApplicationController
   before_action :check_group_owner, only: [:edit, :update, :permits]
 
   def index
-    @groups = Group.all
+    @groups = Group.all.page(params[:page]).per(10).reverse_order
     @member = Member.find(current_member.id)
   end
 
@@ -47,7 +47,7 @@ class Public::GroupsController < ApplicationController
 
   def permits
     @group = Group.find(params[:id])
-    @permits = @group.permits.page(params[:page])
+    @permits = @group.permits.page(params[:page]).per(10)
   end
 
   private

@@ -22,6 +22,7 @@
               <td class="td_vertical_align_middle"><%= link_to "#{post.post_comments.count} コメント", post_path(post.id) %></td>
             </tr>
           <% end %>
+          <div class="d-flex justify-content-center"><%= paginate @posts, theme: 'bootstrap-5' %></div>
         </tbody>
       </table>
     </div>
